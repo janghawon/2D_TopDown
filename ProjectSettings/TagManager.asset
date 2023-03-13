@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 3538824675
+    locked: 0
+  - name: Background
+    uniqueID: 754251675
+    locked: 0
+  - name: Agent
+    uniqueID: 2726902621
+    locked: 0
+  - name: CoreGround
+    uniqueID: 2112394327
+    locked: 0
+  - name: Top
+    uniqueID: 3814951625
+    locked: 0
