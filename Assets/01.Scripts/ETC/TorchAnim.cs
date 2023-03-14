@@ -49,9 +49,10 @@ public class TorchAnim : MonoBehaviour
                 targetRadius,
                 randTime).OnComplete(() => StartShake());
 
+        seq.Join(t0);
         seq.Append(t1);
         seq.Join(t2);
-        seq.Join(t0);
+        
         seq.AppendCallback(() => StartShake());
     }
 }
