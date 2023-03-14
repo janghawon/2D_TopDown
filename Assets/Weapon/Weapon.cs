@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     protected int _ammo;
     public int Ammo
     {
-        get { return Ammo; }
+        get { return _ammo; }
         set
         {
             _ammo = Mathf.Clamp(value, 0, WeaponData.ammoCapcity);

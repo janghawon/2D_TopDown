@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841730ffde99a3b4cbe9994c8a8ab455, type: 3}
   m_Name: AssultRifle
   m_EditorClassIdentifier: 
-  ammoCapacity: 100
-  autoFire: 0
+  ammoCapcity: 100
+  autoFire: 1
   weaponDelay: 0.1
-  apreadAngle: 5
+  spreadAngle: 5
   bulletCount: 1
