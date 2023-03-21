@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class RegularBullet : poolableMono
 {
+    [SerializeField] private BulletDataSo _bulletData;
+
     public bool IsEnemy;
-    public int DamageFsctor = 1;
-    [SerializeField] private float _TTL;
     [SerializeField] private float _timeToLive;
-    [SerializeField] float _bulletSpeed;
     private Rigidbody2D _rigid;
     bool isDead;
 
@@ -19,14 +18,48 @@ public class RegularBullet : poolableMono
     private void FixedUpdate()
     {
         _timeToLive += Time.fixedDeltaTime;
-        _rigid.MovePosition(transform.position + transform.right * _bulletSpeed * Time.fixedDeltaTime);
+        _rigid.MovePosition(transform.position + transform.right * _bulletData.bulletSpeed * Time.fixedDeltaTime);
 
-        if(_timeToLive >= _TTL)
+        if(_timeToLive >= _bulletData.lifeTime)
         {
             isDead = true;
             PoolManager.Instance.Push(this);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isDead) return;
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        {
+            HitObstacle(collision);
+        }
+
+        isDead = true;
+        PoolManager.Instance.Push(this);
+    }
+
+    private void HitObstacle(Collider2D collision)
+    {
+        ImpactScript impact = PoolManager.Instance.Pop(_bulletData.impactObstaclePrefab.name) as ImpactScript;
+        
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 10f);
+
+        if(hit.collider != null)
+        {
+            Quaternion rot = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+            impact.SetPositionAndRotation(hit.point + (Vector2)transform.right * 0.5f, rot);
+        }
+        
+    }
+
+    private void HitEnemy()
+    {
+
+    }
+
     public void SetPositionAndRotation(Vector3 pos, Quaternion rot)
     {
         transform.SetPositionAndRotation(pos, rot);

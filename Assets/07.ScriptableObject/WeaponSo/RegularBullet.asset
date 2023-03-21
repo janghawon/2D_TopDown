@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841730ffde99a3b4cbe9994c8a8ab455, type: 3}
-  m_Name: AssultRifle
+  m_Script: {fileID: 11500000, guid: 95e3aa0a129e67b47955cbd687dc6676, type: 3}
+  m_Name: RegularBullet
   m_EditorClassIdentifier: 
-  ammoCapcity: 486
-  autoFire: 1
-  weaponDelay: 0.2
-  spreadAngle: 5.47
-  bulletCount: 1
+  damage: 5
+  bulletSpeed: 20
+  impactObstaclePrefab: {fileID: 2263637286756249989, guid: 39d15dfc3d101f24491d2c2bea223c00, type: 3}
+  impactEnemyPrefab: {fileID: 0}
+  lifeTime: 1.5

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AgentMovement : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class AgentMovement : MonoBehaviour
 
     protected float _currentVelocity = 0;
     protected Vector2  _movementDirection;
+
+    public UnityEvent<float> OnVelocityChange;
 
     private void Awake()
     {
@@ -44,6 +47,7 @@ public class AgentMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        OnVelocityChange?.Invoke(_currentVelocity);
         _rigid.velocity = _movementDirection * _currentVelocity;
     }
 }

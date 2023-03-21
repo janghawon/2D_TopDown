@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private PoolingListSO _poolingList;
     public static GameManager Instance;
-    [SerializeField] private poolableMono _bulletPrefab;
     private void Awake()
     {
         if(Instance == null)
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private void Makepool()
     {
         PoolManager.Instance = new PoolManager(transform);
-        PoolManager.Instance.CreatePool(_bulletPrefab, 20);
+        _poolingList.list.ForEach(p => PoolManager.Instance.CreatePool(p.prefab, p.poolCount));
+        
     }
 }
