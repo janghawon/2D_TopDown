@@ -11,7 +11,7 @@ public class ImpactScript : poolableMono
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public void DestryAfterAnimation()
+    public void Destry()
     {
         PoolManager.Instance.Push(this);
     }

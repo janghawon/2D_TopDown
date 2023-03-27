@@ -36,6 +36,11 @@ public class RegularBullet : poolableMono
             HitObstacle(collision);
         }
 
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            HitEnemy(collision);
+        }
+
         isDead = true;
         PoolManager.Instance.Push(this);
     }
@@ -45,7 +50,7 @@ public class RegularBullet : poolableMono
         ImpactScript impact = PoolManager.Instance.Pop(_bulletData.impactObstaclePrefab.name) as ImpactScript;
         
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 10f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 10f, 1 << LayerMask.NameToLayer("Enemy"));
 
         if(hit.collider != null)
         {
@@ -55,9 +60,18 @@ public class RegularBullet : poolableMono
         
     }
 
-    private void HitEnemy()
+    private void HitEnemy(Collider2D collison)
     {
+        IDamageable damageable = collison.gameObject.GetComponent<IDamageable>();
 
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 10f);
+
+        if (hit.collider != null)
+        {
+            damageable?.GetHit(_bulletData.damage, this.gameObject, hit.point, hit.normal);
+        }
+
+        
     }
 
     public void SetPositionAndRotation(Vector3 pos, Quaternion rot)
