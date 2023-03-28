@@ -13,7 +13,10 @@ public class TimeController : MonoBehaviour
         StopAllCoroutines();
         Time.timeScale = 1f;
     }
-
+    private void OnDestroy()
+    {
+        ResetTimeScale();
+    }
     public void ModifyTimeScale(float endTimeValue, float timeToWait, Action OnComplete = null)
     {
         StartCoroutine(TimeScaleCoroutine(endTimeValue, timeToWait, OnComplete));

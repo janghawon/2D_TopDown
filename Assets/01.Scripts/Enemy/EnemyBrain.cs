@@ -35,4 +35,10 @@ public class EnemyBrain : MonoBehaviour
             currentState.UpdateState();
         }
     }
+
+    public void Move(Vector2 moveDir, Vector2 targetPosition)
+    {
+        OnMovementKeyPress?.Invoke(moveDir);
+        OnPointerPositionChanged?.Invoke(targetPosition);
+    }
 }

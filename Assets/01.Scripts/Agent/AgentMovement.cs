@@ -19,6 +19,13 @@ public class AgentMovement : MonoBehaviour
     {
         _rigid = GetComponent<Rigidbody2D>();
     }
+
+    public void StopImmediately()
+    {
+        _rigid.velocity = Vector2.zero;
+        _currentVelocity = 0;
+    }
+
     public void MoveAgent(Vector2 movementInput)
     {
         if(movementInput.sqrMagnitude > 0)
@@ -42,7 +49,7 @@ public class AgentMovement : MonoBehaviour
         {
             _currentVelocity -= _movementData.deAcceleration * Time.fixedTime;
         }
-        return Mathf.Clamp(_currentVelocity, 0, 5);
+        return Mathf.Clamp(_currentVelocity, 0, _movementData._maxSpeed);
     }
 
     private void FixedUpdate()

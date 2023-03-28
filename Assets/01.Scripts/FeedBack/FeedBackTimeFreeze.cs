@@ -8,7 +8,8 @@ public class FeedBackTimeFreeze : FeedBack
     [SerializeField] [Range(0, 1f)] private float _timeFreezeValue = 0.2f;
     public override void CompleteFeedback()
     {
-        TimeController.Instance?.ResetTimeScale();
+        if(TimeController.Instance != null)
+            TimeController.Instance.ResetTimeScale();
     }
 
     public override void CreateFeedback()

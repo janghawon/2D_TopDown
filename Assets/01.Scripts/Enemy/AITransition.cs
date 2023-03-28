@@ -6,6 +6,11 @@ public class AITransition : MonoBehaviour
 {
     public List<AIDecision> decisions;
     public AIState transitionState;
+
+    private void Awake()
+    {
+        GetComponents<AIDecision>(decisions);
+    }
     public void Setup(Transform parentTrm)
     {
         decisions.ForEach(d => d.SetUp(parentTrm));
