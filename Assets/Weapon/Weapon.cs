@@ -45,12 +45,13 @@ public class Weapon : MonoBehaviour
     {
         if (_isShooting && _delayCorouine == false)
         {
-            if (Ammo > 0)
+            if (Ammo > _weaponDataSO.bulletCount)
             {
                 OnShoot?.Invoke();
                 for (int i = 0; i < _weaponDataSO.bulletCount; i++)
                 {
                     ShootBullet();
+                    Ammo--;
                 }
             }
             else

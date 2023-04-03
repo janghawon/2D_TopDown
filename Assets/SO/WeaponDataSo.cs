@@ -12,4 +12,8 @@ public class WeaponDataSo : ScriptableObject
     [Range(0, 10f)] public float spreadAngle = 5f;
 
     public int bulletCount = 1;
+
+    public float reloadTime = 1f;
+
+    public AudioClip reloadClip;
 }
