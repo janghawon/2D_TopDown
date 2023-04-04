@@ -34,7 +34,7 @@ public class TextureParticleManager : MonoBehaviour
 
         for (int i = 0; i < _shellList.Count; i++)
         {
-            Particle p = _bloodList[i];
+            Particle p = _shellList[i];
             p.UpdateParticle();
             if (p.IsComplete())
             {
@@ -50,14 +50,15 @@ public class TextureParticleManager : MonoBehaviour
         float moveSpeed = Random.Range(1.5f, 2.5f);
         Vector3 quadSize = new Vector3(0.15f, 0.15f);
         float slowDownFactor = Random.Range(2, 2.5f);
-        _shellList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, 0, uvIndex,
+        _shellList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, 
+                                    Random.Range(0, 359), uvIndex,
                                     moveSpeed, slowDownFactor, true));
     }
-    public void SpawnBlood(Vector3 pos, Vector3 dir)
+    public void SpawnBlood(Vector3 pos, Vector3 dir, float size = 1)
     {
         int uvIndex = _meshParticleSystem.GetRandomBloodIndex();
         float moveSpeed = Random.Range(0.3f, 0.5f);
-        Vector3 quadSize = new Vector3(1,1);
+        Vector3 quadSize = new Vector3(1,1) * size;
         float slowDownFactor = Random.Range(0.8f, 1.5f);
         _bloodList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, 
                                     Random.Range(0, 359), uvIndex,
