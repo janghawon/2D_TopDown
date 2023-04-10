@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyBrain : MonoBehaviour
+public class EnemyBrain : PoolableMono
 {
     public Transform Target;
 
@@ -16,6 +16,15 @@ public class EnemyBrain : MonoBehaviour
     public Transform BasePosition; //이게 거리측정을 몬스터의 바닥에서 
 
     public AIState CurrentState;
+
+    private EnemyRenderer _enemyRenderer;
+
+    [SerializeField] private bool _isActive = false;
+
+    private void Awake()
+    {
+        _enemyRenderer = transform.Find("VisualSprite").GetComponent<EnemyRenderer>();
+    }
 
     private void Start()
     {
@@ -31,6 +40,10 @@ public class EnemyBrain : MonoBehaviour
 
     public void Update()
     {
+        if (_isActive == false)
+        {
+            return;
+        }
         if(Target == null)
         {
             OnMovementKeyPress?.Invoke(Vector2.zero);
@@ -40,9 +53,21 @@ public class EnemyBrain : MonoBehaviour
         }
     }
 
+    public void ShowEnemy()
+    {
+        _isActive = false;
+        _enemyRenderer.ShowProgress(2f, () => _isActive = true);
+    }
+
     public void Move(Vector2 moveDirection, Vector2 targetPosition)
     {
         OnMovementKeyPress?.Invoke(moveDirection);
         OnPointerPositionChanged?.Invoke(targetPosition);
+    }
+
+    public override void Reset()
+    {
+        _isActive = false;
+
     }
 }

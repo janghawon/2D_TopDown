@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private PoolingListSO _poolingList;
 
+    [SerializeField] private Transform _spawnPointParent;
+
     [SerializeField]
     private Transform _playerTrm; //이건 나중에 찾아오는 형식으로 변경해야 함.
     public Transform PlayerTrm => _playerTrm;
+
+    private List<Transform> _spawnPointList;
 
     private void Awake()
     {
@@ -25,6 +29,9 @@ public class GameManager : MonoBehaviour
         TimeController.Instance = transform.AddComponent<TimeController>();
 
         MakePool();
+        _spawnPointList = new List<Transform>();
+        _spawnPointParent.GetComponentsInChildren<Transform>(_spawnPointList);
+        _spawnPointList.RemoveAt(0); // 0번째는 부모
     }
 
 
@@ -35,5 +42,29 @@ public class GameManager : MonoBehaviour
         
     }
 
+    private void Start()
+    {
+        StartCoroutine(SpawnEnemy());
+    }
 
+    private IEnumerator SpawnEnemy()
+    {
+        float currentTime = 0;
+        while(true)
+        {
+            currentTime += Time.deltaTime;
+            if(currentTime >= 3)
+            {
+                currentTime = 0;
+                int idx = Random.Range(0, _spawnPointList.Count);
+
+                EnemyBrain enemy = PoolManager.Instance.Pop("EnemyGrowler") as EnemyBrain;
+
+                enemy.transform.position = _spawnPointList[idx].position;
+                enemy.ShowEnemy();
+            }
+            yield return null;
+
+        }
+    }
 }
