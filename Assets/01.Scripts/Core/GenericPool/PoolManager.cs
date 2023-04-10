@@ -5,34 +5,36 @@ using UnityEngine;
 public class PoolManager
 {
     public static PoolManager Instance;
-    private Dictionary<string, Pool<poolableMono>> _pools = new Dictionary<string, Pool<poolableMono>>();
 
-    private Transform _transParent;
+    private Dictionary<string, Pool<PoolableMono>> _pools 
+        = new Dictionary<string, Pool<PoolableMono>>();
+
+    private Transform _trmParent;
     public PoolManager(Transform trmParent)
     {
-        _transParent = trmParent;
+        _trmParent = trmParent;
     }
 
-    public void CreatePool(poolableMono prefab, int count)
+    public void CreatePool(PoolableMono prefab, int count)
     {
-        Pool<poolableMono> pool = new Pool<poolableMono>(prefab, _transParent, count);
-        _pools.Add(prefab.gameObject.name, pool);
+        Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab, _trmParent, count);
+        _pools.Add(prefab.gameObject.name, pool); // µñ¼Å³Ê¸®¿¡ µî·ÏÇÑ´Ù.
     }
 
-    public poolableMono Pop(string prefabName)
+    public PoolableMono Pop(string prefabName)
     {
         if(_pools.ContainsKey(prefabName) == false)
         {
-            Debug.LogError(11);
+            Debug.LogError($"Prefab doesn't exist on pool list : {prefabName}");
             return null;
         }
 
-        poolableMono item = _pools[prefabName].Pop();
+        PoolableMono item = _pools[prefabName].Pop();
         item.Reset();
         return item;
     }
 
-    public void Push(poolableMono obj)
+    public void Push(PoolableMono obj)
     {
         _pools[obj.name].Push(obj);
     }

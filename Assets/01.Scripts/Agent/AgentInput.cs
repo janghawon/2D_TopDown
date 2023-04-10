@@ -5,22 +5,23 @@ using UnityEngine;
 using UnityEngine.Events;
 using static Define;
 
-
 public class AgentInput : MonoBehaviour, IAgentInput
 {
+
     [field: SerializeField] public UnityEvent<Vector2> OnMovementKeyPress { get; set; }
     [field: SerializeField] public UnityEvent<Vector2> OnPointerPositionChanged { get; set; }
     [field: SerializeField] public UnityEvent OnFireButtonPress { get; set; }
     [field: SerializeField] public UnityEvent OnFireButtonRelease { get; set; }
 
-    private bool _fireButtonDown = false;
+    private bool _fireButtonDown = false; //현재 총알발사 버튼이 눌림 상태인지
 
     public UnityEvent OnReloadButtonPress;
 
     private void Update()
     {
         GetMovementInput();
-        GetPointInPut();
+        GetPointerInput();
+
         GetFireInput();
         GetReloadInput();
     }
@@ -37,27 +38,26 @@ public class AgentInput : MonoBehaviour, IAgentInput
     {
         if(Input.GetAxisRaw("Fire1") > 0)
         {
-            if(_fireButtonDown == false)
+            if(_fireButtonDown == false) //처음으로 버튼이 눌린거면 눌렸음을 통지
             {
                 _fireButtonDown = true;
                 OnFireButtonPress?.Invoke();
             }
-        }
-        else
+        }else
         {
-            if(_fireButtonDown == true)
+            if(_fireButtonDown == true)  //버튼을 땠는데 기존에 눌려있던거라면
             {
                 _fireButtonDown = false;
-                OnFireButtonRelease?.Invoke();
+                OnFireButtonRelease?.Invoke(); //버튼이 떼졌음을 통지
             }
         }
     }
 
-    private void GetPointInPut()
+    private void GetPointerInput()
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;
-        Vector2 mouseInWorldPos = Maincam.ScreenToWorldPoint(mousePos);
+        Vector2 mouseInWorldPos = MainCam.ScreenToWorldPoint(mousePos); //이 코드는 무조건 변경
         OnPointerPositionChanged?.Invoke(mouseInWorldPos);
     }
 

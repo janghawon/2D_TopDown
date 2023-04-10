@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Obstacles
+  - Obstacle
   - Enemy
   - EnemyMovementCollider
   - PlayerMovementCollider
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -42,17 +42,17 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Floor
-    uniqueID: 3538824675
+    uniqueID: 1198642399
     locked: 0
   - name: Background
-    uniqueID: 754251675
+    uniqueID: 514895193
     locked: 0
   - name: Agent
-    uniqueID: 2726902621
+    uniqueID: 367839011
     locked: 0
-  - name: CoreGround
-    uniqueID: 2112394327
+  - name: Foreground
+    uniqueID: 2340182897
     locked: 0
   - name: Top
-    uniqueID: 3814951625
+    uniqueID: 3597076973
     locked: 0

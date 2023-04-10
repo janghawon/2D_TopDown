@@ -6,11 +6,13 @@ public class InnerDistanceDecision : AIDecision
 {
     public float Distance = 5f;
 
-    public override bool MakeADescision()
+    public override bool MakeADecision()
     {
-        Vector3 dis = _enemyBrain.Target.position - _enemyBrain.BasePosition.position;
-        return dis.magnitude <= Distance;
+        float dis = Vector2.Distance(_enemyBrain.Target.position, _enemyBrain.BasePosition.position);
+        
+        return dis <= Distance;
     }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -21,6 +23,5 @@ public class InnerDistanceDecision : AIDecision
             Gizmos.color = Color.white;
         }
     }
-
-#endif
+#endif 
 }

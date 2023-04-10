@@ -65,14 +65,14 @@ public class MeshParticleSystem : MonoBehaviour
 
         var uvCoordList = new List<UVCoords>();
 
-        foreach (ParticleUVPixel pixelUV in _uvPixelArr)
+        foreach(ParticleUVPixel pixelUV in _uvPixelArr)
         {
             UVCoords temp = new UVCoords
             {
-                uv00 = new Vector2((float)pixelUV.uv00Pixel.x / tWidth,
+                uv00 = new Vector2((float)pixelUV.uv00Pixel.x / tWidth, 
                                     (float)pixelUV.uv00Pixel.y / tHeight),
 
-                uv11 = new Vector2((float)pixelUV.uv11Pixel.x / tWidth,
+                uv11 = new Vector2((float)pixelUV.uv11Pixel.x / tWidth, 
                                     (float)pixelUV.uv11Pixel.y / tHeight)
             };
             uvCoordList.Add(temp);
@@ -100,7 +100,7 @@ public class MeshParticleSystem : MonoBehaviour
             Vector3 quadSize = new Vector3(1, 1, 0);
             float rot = 0;
             int uvIndex = GetRandomShellIndex();
-            int qIndex = AddQuad(pos, rot, quadSize, false, uvIndex);
+            int qIndex = AddQuad(pos, rot, quadSize , false, uvIndex);
             FunctionUpdater.Instance.Create(() =>
             {
                 pos += new Vector3(1, 1) * 0.8f * Time.deltaTime;
@@ -110,7 +110,7 @@ public class MeshParticleSystem : MonoBehaviour
                 UpdateQuad(qIndex, pos, rot, quadSize, false, uvIndex);
             });
         }
-
+                
     }
 
     private int _quadIndex = 0; //현재 쿼드의 인덱스
@@ -133,7 +133,7 @@ public class MeshParticleSystem : MonoBehaviour
         int vIndex2 = vIndex0 + 2;
         int vIndex3 = vIndex0 + 3;
 
-        if (skewed)
+        if(skewed)
         {
             //비틀기는 아직은 신경쓰지 말자 헷갈리거든
         }
@@ -187,7 +187,7 @@ public class MeshParticleSystem : MonoBehaviour
         {
             _mesh.triangles = _triangles;
             _updateTriangles = false;
-        }
+        }        
     }
 
     public void DestroyQuad(int quadIndex)

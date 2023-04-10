@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ReloadGaugeUI : MonoBehaviour
 {
-    [SerializeField] private Transform _reloadBar;
+    [SerializeField]
+    private Transform _reloadBar;
 
     public void ReloadGaugeNormal(float value)
     {

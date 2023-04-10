@@ -6,32 +6,33 @@ using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
-    AIActionData _aiActionData;
     public bool IsEnemy { get; set; }
-
     public Vector3 _hitPoint { get; private set; }
 
-    protected bool _isDead = false;
+    protected bool _isDead = false; //사망 여부를 나타내는 것
 
-    [SerializeField] int _maxHealth;
+    [SerializeField]
+    protected int _maxHealth; //이건 나중에 SO로 빼게될 거다.
+
     protected int _currentHealth;
 
-    public UnityEvent OnGetHit = null;
-    public UnityEvent OnDie = null;
+    public UnityEvent OnGetHit = null;  //맞았을 때 발생할 이벤트랑
+    public UnityEvent OnDie = null;  // 죽었을 때 발생할 이벤트
+
+    private AIActionData _aiActionData;
 
     private void Awake()
     {
-        _aiActionData = GameObject.Find("AI").GetComponent<AIActionData>();
         _currentHealth = _maxHealth;
+        _aiActionData = transform.Find("AI").GetComponent<AIActionData>();
     }
+
     public void GetHit(int damage, GameObject damageDealer, Vector3 hitPoint, Vector3 normal)
     {
+        if (_isDead) return;
+
         _aiActionData.hitPoint = hitPoint;
         _aiActionData.hitNormal = normal;
-        if(_isDead)
-        {
-            return;
-        }
 
         _currentHealth -= damage;
 

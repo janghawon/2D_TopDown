@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeedBackShellGenerate : FeedBack
+public class FeedbackShellGenerate : Feedback
 {
-    [SerializeField] private Transform _shellPosition;
+    [SerializeField]
+    private Transform _shellPosition;
+
     public override void CompleteFeedback()
     {
-
+            
     }
 
     public override void CreateFeedback()

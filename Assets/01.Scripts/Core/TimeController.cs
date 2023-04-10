@@ -6,17 +6,18 @@ using UnityEngine;
 public class TimeController : MonoBehaviour
 {
     public static TimeController Instance;
-
-    
+        
     public void ResetTimeScale()
     {
         StopAllCoroutines();
         Time.timeScale = 1f;
     }
+
     private void OnDestroy()
     {
         ResetTimeScale();
     }
+
     public void ModifyTimeScale(float endTimeValue, float timeToWait, Action OnComplete = null)
     {
         StartCoroutine(TimeScaleCoroutine(endTimeValue, timeToWait, OnComplete));

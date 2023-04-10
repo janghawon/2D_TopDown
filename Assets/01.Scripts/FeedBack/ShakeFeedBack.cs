@@ -1,19 +1,25 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
-public class ShakeFeedBack : FeedBack
+public class ShakeFeedback : Feedback
 {
-    [SerializeField] private Transform _objectToShake;
-    [SerializeField] private float _duration = 0.2f, _strength = 1f, _randomness = 90f;
-    [SerializeField] private int _vibrato = 10;
-    [SerializeField] private bool _snapping = false, _fadeOut = true;
+    [SerializeField]
+    private Transform _objectToShake; //흔들 물체
+    [SerializeField]
+    private float _duration = 0.2f, _strength = 1f, _randomness = 90f;
+    [SerializeField]
+    private int _vibrato = 10;
+
+    [SerializeField]
+    private bool _snapping = false, _fadeOut = true;
 
     public override void CompleteFeedback()
     {
-        _objectToShake.DOComplete(); // transform에서 진행중인 트윈 모두 종료
+        _objectToShake.DOComplete(); //기존에 transform에서 진행중이던 트윈을 모두 종료한다.
     }
+
     public override void CreateFeedback()
     {
         CompleteFeedback();

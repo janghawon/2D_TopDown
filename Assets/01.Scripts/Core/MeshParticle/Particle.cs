@@ -18,9 +18,9 @@ public class Particle
     private bool _isRotate;
     public int QuadIndex => _quadIndex;
 
-    public Particle(Vector3 quadPosition, Vector3 direction,
+    public Particle(Vector3 quadPosition, Vector3 direction, 
                 MeshParticleSystem meshParticleSystem,
-                Vector3 quadSize, float rotation, int uvIndex, float moveSpeed,
+                Vector3 quadSize, float rotation, int uvIndex, float moveSpeed, 
                 float slowDownFactor, bool isRotate = false)
     {
         _quadPosition = quadPosition;
@@ -40,7 +40,7 @@ public class Particle
         _quadPosition += _direction * _moveSpeed * Time.deltaTime;
         if(_isRotate)
         {
-            _rotation += 360 * (_moveSpeed * 0.1f) * Time.deltaTime;
+            _rotation += 360f * (_moveSpeed * 0.1f) * Time.deltaTime;
         }
 
         _meshParticleSystem.UpdateQuad(_quadIndex, _quadPosition, _rotation, _quadSize, false, _uvIndex);
@@ -50,6 +50,6 @@ public class Particle
 
     public bool IsComplete()
     {
-        return _moveSpeed < 0.05f;
+        return _moveSpeed < 0.05f; //이 밑으로 떨어지면 정지시키자. 더이상 애니메이션 안하고
     }
 }

@@ -1,31 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MeshTest : MonoBehaviour
 {
     private MeshFilter _meshFilter;
+    private MeshRenderer _renderer;
+
     private void Awake()
     {
         _meshFilter = GetComponent<MeshFilter>();
-    }
-
-    private void Start()
-    {
-        
+        _renderer = GetComponent<MeshRenderer>();
     }
 
     private void Update()
     {
         if(Input.GetButtonDown("Jump"))
         {
-            int random = Random.Range(0, 8);
-            DrawBloodParticle(random);
+            int idx = Random.Range(0, 8);
+            DrawBloodParticle(idx);
         }
     }
+
     private void DrawBloodParticle(int idx)
     {
-        Mesh mesh = new Mesh();
+        Mesh mesh = new Mesh(); //새로운 메시를 만들어준다.
 
         Vector3[] vertices = new Vector3[4];
         Vector2[] uv = new Vector2[4];
@@ -47,11 +48,12 @@ public class MeshTest : MonoBehaviour
         uv[1] = new Vector2(0.125f * idx, 1f);
         uv[2] = new Vector2(0.125f * (idx + 1), 1f);
         uv[3] = new Vector2(0.125f * (idx + 1), 0.5f);
+        
 
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
 
-        _meshFilter.mesh = mesh;
+        _meshFilter.mesh = mesh; //만든 메시를 넣어준다.
     }
 }

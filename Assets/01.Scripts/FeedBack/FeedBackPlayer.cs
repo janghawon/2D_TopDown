@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeedBackPlayer : MonoBehaviour
+public class FeedbackPlayer : MonoBehaviour
 {
-    [SerializeField] private List<FeedBack> _feedbackToPlay = null;
+    [SerializeField]
+    private List<Feedback> _feedbackToPlay = null;
 
-    public void PlayFeedBack()
+    public void PlayFeedback()
     {
-        foreach (FeedBack f in _feedbackToPlay)
+        FinishFeedback(); //이전 피드백 종료후 실행
+        foreach (Feedback f in _feedbackToPlay)
         {
             f.CreateFeedback();
         }
     }
-    public void FinishFeedBack()
+
+    public void FinishFeedback()
     {
-        foreach (FeedBack f in _feedbackToPlay)
+        foreach (Feedback f in _feedbackToPlay)
         {
             f.CompleteFeedback();
         }
     }
+    
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     protected AudioSource _audioSource;
-    [SerializeField] protected float _pitchRandmness = 0.2f;
+    [SerializeField]
+    protected float _pitchRandomness = 0.2f;
     protected float _basePitch;
 
     private void Awake()
@@ -20,12 +21,12 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayClipWithVariablePitch(AudioClip clip)
     {
-        float randomPitch = Random.Range(-_pitchRandmness, _pitchRandmness);
+        float randomPitch = Random.Range(-_pitchRandomness, _pitchRandomness);
         _audioSource.pitch = _basePitch + randomPitch;
-        playClip(clip);
+        PlayClip(clip);
     }
 
-    public void playClip(AudioClip clip)
+    public void PlayClip(AudioClip clip)
     {
         _audioSource.Stop();
         _audioSource.clip = clip;

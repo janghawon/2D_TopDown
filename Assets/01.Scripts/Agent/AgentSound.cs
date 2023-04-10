@@ -5,24 +5,24 @@ using UnityEngine;
 public class AgentSound : AudioPlayer
 {
     public AudioClip stepSound, hitClip, deathClip, attackSound;
-    
+
     public void PlayStepSound()
     {
         PlayClipWithVariablePitch(stepSound);
     }
 
-    public void PlayerHitClip()
+    public void PlayHitClip()
     {
         PlayClipWithVariablePitch(hitClip);
     }
 
     public void PlayDeathClip()
     {
-        playClip(deathClip);
+        PlayClip(deathClip);
     }
 
     public void PlayAttackClip()
     {
-        playClip(attackSound);
+        PlayClip(attackSound);
     }
 }

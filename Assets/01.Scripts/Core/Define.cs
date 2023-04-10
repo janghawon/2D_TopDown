@@ -5,7 +5,7 @@ using UnityEngine;
 public class Define : MonoBehaviour
 {
     private static Camera _mainCam = null;
-    public static Camera Maincam
+    public static Camera MainCam
     {
         get
         {
@@ -13,5 +13,4 @@ public class Define : MonoBehaviour
             return _mainCam;
         }
     }
-    
 }

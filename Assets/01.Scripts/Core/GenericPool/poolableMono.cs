@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class poolableMono : MonoBehaviour
+public abstract class PoolableMono : MonoBehaviour
 {
     public abstract void Reset();
 }

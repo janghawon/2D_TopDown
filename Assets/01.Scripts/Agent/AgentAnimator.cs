@@ -9,18 +9,22 @@ public class AgentAnimator : MonoBehaviour
     protected readonly int _walkBoolHash = Animator.StringToHash("Walk");
 
     public UnityEvent OnFootStep = null;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
     }
-    public void AnimatrPlayer(float velocity)
+
+    public void AnimatePlayer(float velocity)
     {
         SetWalkAnimation(velocity > 0);
     }
+
     public void SetWalkAnimation(bool value)
     {
         _animator.SetBool(_walkBoolHash, value);
     }
+
     public void FootStepEvent()
     {
         OnFootStep?.Invoke();

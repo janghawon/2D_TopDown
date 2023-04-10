@@ -7,7 +7,7 @@ public class TextureParticleManager : MonoBehaviour
     public static TextureParticleManager Instance;
     private MeshParticleSystem _meshParticleSystem;
 
-    private List<Particle> _shellList;
+    private List<Particle> _shellList;  //이부분은 커스텀에 따라 변경해야 함
     private List<Particle> _bloodList;
 
     private void Awake()
@@ -16,7 +16,6 @@ public class TextureParticleManager : MonoBehaviour
         Instance = this;
         _bloodList = new List<Particle>();
         _shellList = new List<Particle>();
-
     }
 
     private void Update()
@@ -49,24 +48,24 @@ public class TextureParticleManager : MonoBehaviour
         int uvIndex = _meshParticleSystem.GetRandomShellIndex();
         float moveSpeed = Random.Range(1.5f, 2.5f);
         Vector3 quadSize = new Vector3(0.15f, 0.15f);
-        float slowDownFactor = Random.Range(2, 2.5f);
-        _shellList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, 
-                                    Random.Range(0, 359), uvIndex,
-                                    moveSpeed, slowDownFactor, true));
+        float slowDownFactor = Random.Range(2f, 2.5f);
+        _shellList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, Random.Range(0, 359f), 
+                                        uvIndex, moveSpeed, slowDownFactor, true));
     }
-    public void SpawnBlood(Vector3 pos, Vector3 dir, float size = 1)
+
+    public void SpawnBlood(Vector3 pos, Vector3 dir, float sizeFactor = 1f)
     {
         int uvIndex = _meshParticleSystem.GetRandomBloodIndex();
         float moveSpeed = Random.Range(0.3f, 0.5f);
-        Vector3 quadSize = new Vector3(1,1) * size;
+        Vector3 quadSize = new Vector3(1f, 1f) * sizeFactor;
         float slowDownFactor = Random.Range(0.8f, 1.5f);
-        _bloodList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, 
-                                    Random.Range(0, 359), uvIndex,
-                                    moveSpeed, slowDownFactor, false));
+        _bloodList.Add(new Particle(pos, dir, _meshParticleSystem, quadSize, Random.Range(0, 359f),
+                                        uvIndex, moveSpeed, slowDownFactor, false));
     }
 
     public void ClearBloodAndShell()
     {
         _meshParticleSystem.DestroyAllQuad();
     }
+
 }
