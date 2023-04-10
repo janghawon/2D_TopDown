@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyMat
-  m_Shader: {fileID: -6465566751694194690, guid: e8f35a6435a2c3141a7b8dd613a48654, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 1f826389d7f0f3f49ad181af076b8aa7, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -38,13 +38,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 1
+    - _Dissolve: 0.5
     - _DissolveOutline: 0.05
+    - _IsDissolve: 0
+    - _IsSolidColor: 0
     - _NoiseScale: 20
-    - _ShowBorder: 0.05
-    - _isDissolve: 0
-    - _isSolidColor: 0
-    - _showRate: -1
+    - _ShowBorder: 0.04
+    - _ShowRate: -1
     m_Colors:
+    - _BorderColor: {r: 9.272804, g: 0, b: 0, a: 0}
     - _DissolveColor: {r: 5.656854, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
