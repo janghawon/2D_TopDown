@@ -69,10 +69,19 @@ public class RegularBullet : PoolableMono
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 10f, 
             1 << LayerMask.NameToLayer("Enemy")); //길이 10으로 총알 오른쪽
 
+       
+
+        
+
         if (hit.collider != null)
         {
             IDamageable damageable = hit.collider.gameObject.GetComponent<IDamageable>();
             damageable?.GetHit(_bulletData.damage, gameObject, hit.point, hit.normal);
+
+            PopupText text = PoolManager.Instance.Pop("PopupText") as PopupText;
+            text.SetUp(_bulletData.damage.ToString(),
+                   collision.transform.position + new Vector3(0, 0.5f, 0),
+                   Color.red);
 
             ImpactScript impact = PoolManager.Instance.Pop(_bulletData.impactEnemyPrefab.name) as ImpactScript;
             Quaternion rot = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360f)));
