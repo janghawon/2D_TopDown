@@ -10,6 +10,7 @@ public class EnemyBrain : PoolableMono
     public UnityEvent<Vector2> OnMovementKeyPress;
     public UnityEvent<Vector2> OnPointerPositionChanged; //마우스방향전환을 
 
+    public UnityEvent OnAttackButtonPress = null;
     //공격 은 어짜피 오늘 못하니까 일단 쌩까고
 
 
@@ -69,5 +70,10 @@ public class EnemyBrain : PoolableMono
     {
         _isActive = false;
 
+    }
+
+    public void Attack()
+    {
+        OnAttackButtonPress?.Invoke();
     }
 }

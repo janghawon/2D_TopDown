@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
                 enemy.ShowEnemy();
             }
             yield return null;
-
         }
     }
 }
