@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Dropper : MonoBehaviour
 {
     [SerializeField] private ItemDropTableSo _dropTable;
+    [SerializeField] private ItemDropTableSo _coinDropTable;
     private float[] _itemWeights;
 
     [SerializeField] private bool _dropEffect = false;
@@ -34,6 +35,18 @@ public class Dropper : MonoBehaviour
                 Vector3 offset = Random.insideUnitCircle * 1.5f;
                 item.transform.DOJump(transform.position + offset, _dropPower, 1, 0.35f);
             }
+        }
+    }
+
+    public void CoinDrop()
+    {
+        ItemScript item = PoolManager.Instance.Pop(_coinDropTable.DropList[0].ItemPrefab.name) as ItemScript;
+        item.transform.position = transform.position;
+
+        if (_dropEffect)
+        {
+            Vector3 offset = Random.insideUnitCircle * 1.5f;
+            item.transform.DOJump(transform.position + offset, _dropPower, 1, 0.35f);
         }
     }
 

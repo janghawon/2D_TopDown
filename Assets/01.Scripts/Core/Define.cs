@@ -7,7 +7,7 @@ public enum ItemType
     None,
     Health,
     Ammo,
-
+    Coin
 }
 
 public class Define : MonoBehaviour

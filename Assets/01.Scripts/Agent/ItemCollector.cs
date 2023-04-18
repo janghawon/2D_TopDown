@@ -48,6 +48,7 @@ public class ItemCollector : MonoBehaviour
     }
 
     public UnityEvent<int> OnAmmoAdded = null;
+    public UnityEvent<int> OnHealthAdded = null;
 
     private void ProcessItem(ItemType type, int value)
     {
@@ -55,6 +56,9 @@ public class ItemCollector : MonoBehaviour
         {
             case ItemType.Ammo:
                 OnAmmoAdded?.Invoke(value);
+                break;
+            case ItemType.Health:
+                OnHealthAdded?.Invoke(value);
                 break;
         }
     }

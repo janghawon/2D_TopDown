@@ -12,7 +12,7 @@ public class EnemyBrain : PoolableMono
 
     public UnityEvent OnAttackButtonPress = null;
     //공격 은 어짜피 오늘 못하니까 일단 쌩까고
-
+    public UnityEvent OnResetPool = null;
 
     public Transform BasePosition; //이게 거리측정을 몬스터의 바닥에서 
 
@@ -69,11 +69,23 @@ public class EnemyBrain : PoolableMono
     public override void Reset()
     {
         _isActive = false;
+        _enemyRenderer.Reset();
 
+        OnResetPool?.Invoke();
     }
 
     public void Attack()
     {
         OnAttackButtonPress?.Invoke();
+    }
+
+    public void Dead()
+    {
+        _isActive = false;
+    }
+
+    public void GotoPool()
+    {
+        PoolManager.Instance.Push(this);
     }
 }

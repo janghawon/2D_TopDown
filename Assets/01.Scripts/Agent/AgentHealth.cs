@@ -36,6 +36,12 @@ public class AgentHealth : MonoBehaviour, IDamageable
         
     }
 
+    public void AddHealth(int value)
+    {
+        Health += value;
+        OnHealthChanged?.Invoke(_currentHP, _maxHP);
+    }
+
     public void GetHit(int damage, GameObject damageDealer, Vector3 hitPoint, Vector3 normal)
     {
         if (_isDead) return;
