@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     {
         PoolManager.Instance = new PoolManager(transform); //풀매니저 만들어주고
         _poolingList.list.ForEach(p => PoolManager.Instance.CreatePool(p.prefab, p.poolCount));  
-        
     }
 
     private void Start()

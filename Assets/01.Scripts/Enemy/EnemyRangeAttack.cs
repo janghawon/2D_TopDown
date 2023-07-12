@@ -26,6 +26,7 @@ public class EnemyRangeAttack : EnemyAttack
         Sequence seq = DOTween.Sequence();
 
         FireBall fb = PoolManager.Instance.Pop("FireBall") as FireBall;
+
         fb.transform.position = transform.position + new Vector3(0, 0.25f, 0);
         fb.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         seq.Append(fb.transform.DOMoveY(fb.transform.position.y + 0.5f, 0.5f));
